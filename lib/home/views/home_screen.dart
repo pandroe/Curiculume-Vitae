@@ -9,15 +9,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../web_views/views/github_web_views.dart';
 import '../../web_views/views/linkedin_web_views.dart';
+import '../widgets/image_popup.dart';
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -30,16 +26,30 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Row(
                 children: [
-                  CircleAvatar(
-                    radius: 30.0,
-                    backgroundColor: Colors.transparent,
-                    child: ClipOval(
-                      child: SizedBox(
-                        width: 60.0,
-                        height: 60.0,
-                        child: Image.asset(
-                          'assets/images/foto_pribadi.jpg',
-                          fit: BoxFit.cover,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ImagePopup(
+                              imagePath: 'assets/images/foto_pribadi.jpg'),
+                        ),
+                      );
+                    },
+                    child: CircleAvatar(
+                      radius: 30.0,
+                      backgroundColor: Colors.transparent,
+                      child: ClipOval(
+                        child: SizedBox(
+                          width: 60.0,
+                          height: 60.0,
+                          child: Hero(
+                            tag: 'assets/images/foto_pribadi.jpg',
+                            child: Image.asset(
+                              'assets/images/foto_pribadi.jpg',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
                     ),

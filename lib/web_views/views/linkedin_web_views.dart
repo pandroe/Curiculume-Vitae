@@ -2,32 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class LinkedInWebView extends StatefulWidget {
-  const LinkedInWebView({super.key});
+  const LinkedInWebView({Key? key}) : super(key: key);
 
   @override
-  State<LinkedInWebView> createState() => _LinkedInWebViewState();
+  _LinkedInWebViewState createState() => _LinkedInWebViewState();
 }
 
 class _LinkedInWebViewState extends State<LinkedInWebView> {
-  WebViewController? _controller;
+  late WebViewController _controller;
 
   @override
   void initState() {
-    _controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse(
-          'https://www.linkedin.com/in/daffa-pandu-dewanata/?original_referer='));
     super.initState();
+    _controller = WebViewController();
+    _controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+    _controller.loadRequest(
+        Uri.parse('https://www.linkedin.com/in/daffa-pandu-dewanata'));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('LinkedIn'),
-        ),
-        body: WebViewWidget(
-          controller: _controller!,
-        ));
+      appBar: AppBar(
+        title: Text('LinkedIn'),
+      ),
+      body: WebViewWidget(
+        controller: _controller,
+      ),
+    );
   }
 }
